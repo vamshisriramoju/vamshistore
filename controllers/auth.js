@@ -22,7 +22,8 @@ exports.signup = (req, res) => {
       });
     }
     res.json({
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       id: user._id
     });
@@ -82,7 +83,8 @@ exports.signin = (req, res) => {
     res.cookie("token", token, { expire: new Date() + 9999 });
 
     //send response to front end
-    const { _id, name, email, role } = user;
+    const { _id,email, role } = user;
+    var name = user.firstName + " " + user.lastName
     return res.json({ token, user: { _id, name, email, role } });
   });
 };
